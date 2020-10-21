@@ -1,9 +1,4 @@
 
-
-
-https://fmr.zoom.us/s/8756503751
-
-
 export PYTHONPATH=$PWD
 python3 dr backup --labels backup --bucket hsbc-bucket --log-level DEBUG --once --kube-config /home/pcarlton/.kube/config
 
