@@ -1,0 +1,9 @@
+gitopsParams:
+  git:
+    url: git@github.com:paulcarlton-ww/pauluk.git # GIT URL PLACEHOLDER
+    branch: master # GIT BRANCH PLACEHOLDER
+    path: /cluster/platform # GIT PATH PLACEHOLDER
+  images:
+    clusterComponents: docker.io/weaveworks/wkp-cluster-components:master-b0967166 # CLUSTER COMPONENTS IMAGE PLACEHOLDER
+    gitopsRepoBroker: docker.io/weaveworks/gitops-repo-broker:master-c0c66b97
+    repositoryController: null

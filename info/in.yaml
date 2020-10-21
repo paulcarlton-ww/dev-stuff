@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: echoserver
+    namespace: echoserver
+    annotations:
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/subnets: subnet-0281b7607c94f877a,subnet-028623a30e3afaea2,subnet-029d9151988a3af68,subnet-034a0bd3cf53569f6,subnet-059d3c26efa774878,subnet-0955de5e3f42a87b7
+        alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+spec:
+    rules:
+    - host: echoserver.example.com

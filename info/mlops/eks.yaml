@@ -1,0 +1,42 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: mlops
+  region: eu-west-2
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    labels: { node-role.kubernetes.io/system: system }
+    desiredCapacity: 3
+    minSize: 1
+    maxSize: 5
+    ssh:
+      publicKeyPath: id_rsa.pub
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+  - name: ng-2
+    instanceType: m5.xlarge
+    desiredCapacity: 3
+    minSize: 1
+    maxSize: 6
+    labels: { node-role.kubernetes.io/worker: worker }
+    ssh:
+      publicKeyPath: id_rsa.pub
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+secretsEncryption:
+  keyARN: "arn:aws:kms:eu-west-2:482649550366:key/19e611b5-898e-4cdf-8eb0-6bb66ff029ac"
+
+iam:
+  withOIDC: true

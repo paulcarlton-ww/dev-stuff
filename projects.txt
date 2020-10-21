@@ -1,0 +1,5 @@
+# List of project, format is...
+# name: project directory relative to GOPATH/src
+ref-arch:github.com/weaveworks/reference-architecture
+ww-kspray:github.com/weaveworks/kubespray
+pc-packet-ww:github.com/paulcarlton-ww/packet-weaveworks

@@ -1,0 +1,9 @@
+[core]
+	editor = vim
+[user]
+	email = paul.carlton@weave.works
+	name = paulcarlton-ww
+[push]
+    default = current
+[url "git@github.com:"]
+	insteadOf = https://github.com/

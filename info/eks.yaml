@@ -1,0 +1,42 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: pcuk
+  region: eu-west-2
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    labels: { node-role.kubernetes.io/system: system }
+    desiredCapacity: 3
+    minSize: 1
+    maxSize: 5
+    ssh:
+      allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+  - name: ng-2
+    instanceType: m5.xlarge
+    desiredCapacity: 3
+    minSize: 1
+    maxSize: 6
+    labels: { node-role.kubernetes.io/worker: worker }
+    ssh:
+      publicKeyPath: id_rsa.pub
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+secretsEncryption:
+  keyARN: "arn:aws:kms:eu-west-2:482649550366:key/6ee1137e-e008-4a19-8b61-890ec958f187"
+
+iam:
+  withOIDC: true

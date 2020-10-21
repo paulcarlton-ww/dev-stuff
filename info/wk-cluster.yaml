@@ -1,0 +1,43 @@
+apiVersion: infrastructure.eksctl.io/v1alpha5
+kind: EKSCluster
+metadata:
+  name: pauluk # set the AWS cluster name here
+spec:
+  region: eu-west-1 # set the AWS region here
+  enablePodIamPolicy: true
+  cloudWatch:
+    clusterLogging:
+      enableTypes:
+      - audit
+      - authenticator
+      - controllerManager
+  iam:
+    serviceAccounts:
+    - attachPolicyARNs:
+      # FIXME: https://github.com/weaveworks/wk-quickstart-eks/issues/56 "Default cluster-config.js creates a ServiceAccount with AWS AdministratorAccess"
+      - arn:aws:iam::aws:policy/AdministratorAccess
+      metadata:
+        name: ekscontroller
+        namespace: wkp-eks-controller
+    withOIDC: true
+  version: 1.15
+
+  nodeGroups:
+    - name: ng-1
+      iam:
+        withAddonPolicies:
+          albIngress: true
+      instanceType: m5.large
+      labels: { node-role.kubernetes.io/system: system }
+      desiredCapacity: 3
+      ssh:
+        allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
+    - name: ng-2
+      instanceType: m5.xlarge
+      desiredCapacity: 3
+      labels: { node-role.kubernetes.io/worker: worker }
+      ssh:
+        publicKeyPath: /home/pcarlton/info/.ssh/id_rsa.pub
+
+  secretsEncryption:
+    keyARN: "arn:aws:kms:eu-west-1:482649550366:key/0ca61987-750a-4fb9-a01a-44b11d7c955b"

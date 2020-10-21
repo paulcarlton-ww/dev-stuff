@@ -1,0 +1,39 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-view
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "serviceaccounts", "services", "limitranges", "namespaces", "resourcequotas", "podtemplates", "secrets"]
+  verbs: ["get", "list"]
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - networking.istio.io
+  resources:
+  - virtualservices
+  - destinationrules
+  - gateway
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - bac.authorization.k8s.io
+  resources:
+  - roles
+  - rolebindings
+  verbs:
+  - get
+  - list
