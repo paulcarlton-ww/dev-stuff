@@ -14,7 +14,7 @@ echo -e "\nCommits\n"
 git log --pretty=oneline --pretty=format:"%H %ae %aD %s" | head -$count
 echo -e "\nTags\n"
 
-for c in `git tag --list | grep -v "^v" | sort --version-sort -r | head -$count `; do
+for c in `git tag --list | sort --version-sort -r | head -$count `; do
     commit=`git rev-list -n 1 $c | cut --characters=-7`
     echo "$c: `git log --pretty=oneline --pretty=format:"%h %ae %aD %s" | grep $commit`"
 done
