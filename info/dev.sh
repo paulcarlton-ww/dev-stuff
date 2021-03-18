@@ -179,7 +179,6 @@ source "${MINIKUBE_LOC}/minikube/tools_env_path.sh"
 source "${MINIKUBE_LOC}/minikube/minikube_env_no_proxy.sh" &>/dev/null
 
 export WORK_DIR=/tmp/rda
-export MINIKUBE_LOC=${WORK_DIR}/rda_test/src/github.hpe.com/platform-opshq/minikube-env
 source "${MINIKUBE_LOC}/minikube/tools_env_path.sh"
 source "${MINIKUBE_LOC}/minikube/minikube_env_no_proxy.sh" &>/dev/null
 export KUBECONFIG=${WORK_DIR}/kubeconfig

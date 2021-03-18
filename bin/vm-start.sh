@@ -2,7 +2,7 @@
 
 # Utility to start devstack
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 if [ -z "$1" ] ; then 
     echo "usage: $0 <vm name>"

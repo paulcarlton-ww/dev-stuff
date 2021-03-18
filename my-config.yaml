@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  key1: config1
-  key2: config
-kind: ConfigMap
-metadata:
-  name: my-config
-  namespace: default

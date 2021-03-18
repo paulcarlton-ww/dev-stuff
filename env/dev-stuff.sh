@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 my_path=`dirname $(dirname "${BASH_SOURCE[0]:-}")`
 pushd "${my_path}" >/dev/null

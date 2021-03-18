@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 projects_file="$GOPATH/src/github.com/paulcarlton-ww/dev/projects.txt"
 project="${1:-}"

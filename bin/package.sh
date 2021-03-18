@@ -2,7 +2,7 @@
 
 # Utility to gofmt, goimports and test a package
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 if [ -z "$1" ] ; then
 	echo "please specify a package"

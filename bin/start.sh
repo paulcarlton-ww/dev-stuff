@@ -2,7 +2,7 @@
 
 # Utility for getting log files from swift
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 # nohup pycharm.sh >/tmp/pycharm.log 2>&1 &
 # nohup vs.sh >/tmp/vs.log 2>&1 &

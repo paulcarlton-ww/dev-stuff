@@ -2,7 +2,7 @@
 
 # Utility to stop steeld process
 # Version: 1.0
-# Author: Paul Carlton (mailto:paul.carlton2@hp.com)
+# Author: Paul Carlton (mailto:paul.carlton@weave.works)
 
 
 set -euo pipefail
