@@ -8,27 +8,28 @@ set -euo pipefail
 
 function usage()
 {
-    echo "usage ${0} <url>"
-    echo "where <url> is the repository clone url"
+    echo "usage ${0} [--dry-run] [--debug] <path>"
+    echo "where <path> is the repository path, i.e. github.com/weaveworks/wksctl"
     echo "This script will create the appropriate directory sub tree under $HOME/go/src"
-    echo "then changes to parent directory and clones"
-    echo "if the repository directory already exists, it does a fetch"
+    echo "then clones the repository if the final element of the path does not exist"
+    echo "if the repository directory already exists, it does a pull"
+    echo "currently only works for github"
 }
 
 function args() {
-  unset dry_run
-  unset force
-  unset url
-  unset debug
+  dry_run=""
+  #unset force
+  unset path
+  #unset debug
 
   arg_list=( "$@" )
   arg_count=${#arg_list[@]}
   arg_index=0
   while (( arg_index < arg_count )); do
     case "${arg_list[${arg_index}]}" in
-          "--debug") debug=1;set -x;;
-        "--dry-run") dry_run=1;;
-          "--force") force=1;;
+          "--debug") set -x;;
+        "--dry-run") dry_run="echo ";;
+        #  "--force") force=1;;
                "-h") usage; exit;;
            "--help") usage; exit;;
                "-?") usage; exit;;
@@ -40,21 +41,26 @@ function args() {
     esac
     (( arg_index+=1 ))
   done
-  url="${arg_list[*]:$arg_index:$(( arg_count - arg_index + 1))}"
-  if [ -z "${target:-}" ] ; then
+  path="${arg_list[*]:$arg_index:$(( arg_count - arg_index + 1))}"
+  if [ -z "${path:-}" ] ; then
       usage; exit 1
   fi
+  path="$(echo "${path}" | cut -f1-3 -d/)"
 }
 
-function clone_repo()
-{
-    local dest
-}
+args "$@"
 
-function pull_repo()
-{
-    local repo_dir
-}
+repo=$(basename "${HOME}/go/src/${path}")
+dir=$(dirname "${HOME}/go/src/${path}")
 
-args $@
+if [ ! -d "${HOME}/go/src/${path}" ] ; then
+    $dry_run mkdir -p "${HOME}/go/src/${path}"
+    $dry_run git clone git@github.com:"$(basename "${dir}")"/"${repo}".git "${HOME}/go/src/${path}"
+fi
+
+$dry_run git -C "${HOME}/go/src/${path}" pull
+
+
+
+
 
