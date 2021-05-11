@@ -18,7 +18,7 @@ function usage()
 
 function args() {
   dry_run=""
-  unset fork
+ fork=""
   unset path
 
   arg_list=( "$@" )
